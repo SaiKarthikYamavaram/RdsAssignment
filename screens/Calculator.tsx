@@ -1,5 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+
 import {
   Pressable,
   StyleSheet,
@@ -8,7 +10,12 @@ import {
   View,
 } from 'react-native';
 
-const Calculator = () => {
+interface calculatorProps {
+  navigation: NavigationProp<ParamListBase>;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Calculator: React.FC<calculatorProps> = ({navigation}) => {
   const [result, setResult] = useState<number>(0);
   const [isZero, setIsZero] = useState<boolean>(true);
   const {width} = useWindowDimensions();
@@ -85,6 +92,7 @@ const Calculator = () => {
           <Text style={styles.btnLabel}> Reset</Text>
         </Pressable>
       </View>
+
     </View>
   );
 };

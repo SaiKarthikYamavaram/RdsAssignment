@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
+  View,
 } from 'react-native';
 
 import AssignmentItem from '../components/AssignmentItem';
@@ -29,6 +30,14 @@ const AssignmentList: React.FC<{}> = () => {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={styles.scrollContainer}
         data={AssignmentData}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{
+              width,
+              height: StyleSheet.hairlineWidth*25,
+            }}
+          />
+        )}
         renderItem={({item, index}) => (
           <AssignmentItem
             item={item}
@@ -36,6 +45,7 @@ const AssignmentList: React.FC<{}> = () => {
           />
         )}
       />
+      <StatusBar showHideTransition={'fade'} backgroundColor={'#141d26'} />
     </SafeAreaView>
   );
 };
@@ -43,6 +53,7 @@ const AssignmentList: React.FC<{}> = () => {
 const styles = StyleSheet.create({
   scrollContainer: {
     width: width,
+    marginTop: 20,
   },
 });
 

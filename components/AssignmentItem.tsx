@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 2,
     backgroundColor: 'white',
-    padding: 20,
     borderRadius: 10,
     marginVertical: 2,
     overflow: 'hidden',
