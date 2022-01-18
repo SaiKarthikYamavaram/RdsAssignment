@@ -18,6 +18,10 @@ const AssignmentData: Array<assignmentData> = [
     title: 'Multiple Calls',
     destination: NavigationConstants.MULTIPLE_CALLS,
   },
+  {
+    title: 'Swipable flatlist',
+    destination: NavigationConstants.FLATLIST,
+  },
 ];
 
 export default AssignmentData;

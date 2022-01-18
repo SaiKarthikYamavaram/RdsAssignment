@@ -2,12 +2,14 @@ import * as React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 import AssignmentList from '../screens/AssignmentList';
 import NavigationConstants from '../constants/NavigationConstants';
 import TwitterTextField from '../screens/TwitterTextField';
 import Calculator from '../screens/Calculator';
 import MultipleButtonApi from '../screens/MultipleButtonApi';
+import FlatlistScreen from '../screens/FlatlistScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,12 @@ function Navigation() {
           name={NavigationConstants.MULTIPLE_CALLS}
           component={MultipleButtonApi}
         />
+        <Stack.Group>
+          <Stack.Screen
+            name={NavigationConstants.FLATLIST}
+            component={gestureHandlerRootHOC(FlatlistScreen)}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
