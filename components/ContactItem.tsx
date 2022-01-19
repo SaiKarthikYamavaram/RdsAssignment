@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import {Image, StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -35,17 +35,25 @@ const MailItem: React.FC<{
       },
       onEnd: _ => {
         if (translateX.value < thresholdL) {
-          translateX.value = withTiming(-width, {}, isFinished => {
-            if (isFinished) {
-              runOnJS(onSlide)(index);
-            }
-          });
+          translateX.value = withTiming(
+            -(width + 20),
+            {duration: 50},
+            isFinished => {
+              if (isFinished) {
+                runOnJS(onSlide)(index);
+              }
+            },
+          );
         } else if (translateX.value > thresholdR) {
-          translateX.value = withTiming(width, {}, isFinished => {
-            if (isFinished) {
-              runOnJS(onSlide)(index);
-            }
-          });
+          translateX.value = withTiming(
+            width + 20,
+            {duration: 50},
+            isFinished => {
+              if (isFinished) {
+                runOnJS(onSlide)(index);
+              }
+            },
+          );
         } else {
           translateX.value = withTiming(0);
         }
@@ -72,10 +80,13 @@ const MailItem: React.FC<{
         onGestureEvent={panGestureHandler}>
         <AnimatedView
           style={[styles.container, styles.width100, translateXStyle]}>
-          <Text style={styles.title} numberOfLines={1}>
-            {item.title}
-          </Text>
-          <Text style={[styles.description]}>{item.description}</Text>
+          <Image source={{uri: item.pic}} style={styles.profileImage} />
+          <View>
+            <Text style={styles.title} numberOfLines={1}>
+              {item.title}
+            </Text>
+            <Text style={[styles.description]}>{item.description}</Text>
+          </View>
         </AnimatedView>
       </PanGestureHandler>
       <View style={[styles.iconContainer, styles.leftContainer]}>
@@ -95,7 +106,7 @@ const styles = StyleSheet.create({
     width: '108%',
     paddingHorizontal: '8%',
     alignSelf: 'center',
-    height: 50,
+    height: 60,
     shadowOpacity: 0.5,
     shadowColor: 'black',
     borderRadius: 12,
@@ -107,10 +118,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: '#ccc',
   },
-  width100: {width: '100%'},
+  width100: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
   padding0: {
     paddingHorizontal: 0,
     paddingVertical: 0,
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'red',
+    marginRight: 16,
   },
   bgRed: {
     backgroundColor: '#f44336',

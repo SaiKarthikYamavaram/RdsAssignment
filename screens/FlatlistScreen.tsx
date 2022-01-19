@@ -46,11 +46,11 @@ const FlatlistScreen: React.FC<{}> = () => {
 
   const removeElement = (index: number) => {
     const newDeletedStack = [
-      ...deletedStack,
       {
         item: data[index],
         index: index,
       },
+      ...deletedStack,
     ];
     setDeletedStack(newDeletedStack);
     const newData = data.filter((item, ind) => index !== ind);
