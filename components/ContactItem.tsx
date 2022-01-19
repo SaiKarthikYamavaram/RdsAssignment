@@ -49,13 +49,16 @@ const MailItem: React.FC<{
       },
     });
 
-  const translateXStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX: translateX.value,
-      },
-    ],
-  }));
+  const translateXStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateX: translateX.value,
+        },
+      ],
+    }),
+    [],
+  );
   return (
     <View style={[styles.container, styles.padding0, styles.bgRed]}>
       <PanGestureHandler
