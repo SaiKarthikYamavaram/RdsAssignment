@@ -12,6 +12,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {gmailDetails} from '../data/mockdata/GmailDetails';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const MailItem: React.FC<{
   item: gmailDetails;
@@ -62,7 +63,8 @@ const MailItem: React.FC<{
   return (
     <View style={[styles.container, styles.padding0, styles.bgRed]}>
       <PanGestureHandler
-        activeOffsetY={[-5, 5]}
+        activeOffsetY={[-1e20, 1e20]}
+        activeOffsetX={0}
         onGestureEvent={panGestureHandler}>
         <AnimatedView style={[styles.container, translateXStyle]}>
           <Text style={styles.title} numberOfLines={1}>
@@ -71,6 +73,12 @@ const MailItem: React.FC<{
           <Text style={[styles.description]}>{item.description}</Text>
         </AnimatedView>
       </PanGestureHandler>
+      <View style={[styles.iconContainer, styles.leftContainer]}>
+        <Icon name="trash-o" style={styles.icon} />
+      </View>
+      <View style={[styles.iconContainer, styles.rightContainer]}>
+        <Icon name="trash-o" style={styles.icon} />
+      </View>
     </View>
   );
 };
@@ -97,7 +105,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   bgRed: {
-    backgroundColor: 'red',
+    backgroundColor: '#f44336',
   },
   title: {
     fontSize: 16,
@@ -109,4 +117,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
   },
+  iconContainer: {
+    position: 'absolute',
+  },
+  icon: {
+    fontSize: 24,
+    color: 'black',
+  },
+  leftContainer: {
+    left: 15,
+  },
+  rightContainer: {right: 15},
 });
