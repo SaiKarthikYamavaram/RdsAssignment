@@ -21,6 +21,7 @@ const MailItem: React.FC<{
 }> = ({item, index, onSlide}) => {
   const {width} = useWindowDimensions();
   const translateX = useSharedValue(0);
+  const borderWidth = useSharedValue(0);
   const thresholdL = -0.25 * width;
   const thresholdR = 0.25 * width;
 
@@ -30,6 +31,7 @@ const MailItem: React.FC<{
     useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
       onActive: event => {
         translateX.value = event.translationX;
+        borderWidth.value = withTiming(1);
       },
       onEnd: _ => {
         if (translateX.value < thresholdL) {
@@ -47,11 +49,13 @@ const MailItem: React.FC<{
         } else {
           translateX.value = withTiming(0);
         }
+        borderWidth.value = withTiming(0);
       },
     });
 
   const translateXStyle = useAnimatedStyle(
     () => ({
+      borderWidth: borderWidth.value,
       transform: [
         {
           translateX: translateX.value,
@@ -66,7 +70,8 @@ const MailItem: React.FC<{
         activeOffsetY={[-1e20, 1e20]}
         activeOffsetX={0}
         onGestureEvent={panGestureHandler}>
-        <AnimatedView style={[styles.container, translateXStyle]}>
+        <AnimatedView
+          style={[styles.container, styles.width100, translateXStyle]}>
           <Text style={styles.title} numberOfLines={1}>
             {item.title}
           </Text>
@@ -87,19 +92,22 @@ export default MailItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '108%',
+    paddingHorizontal: '8%',
     alignSelf: 'center',
     height: 50,
-    paddingHorizontal: 12,
     shadowOpacity: 0.5,
     shadowColor: 'black',
+    borderRadius: 12,
     shadowOffset: {width: 2, height: 2},
     shadowRadius: 6,
     elevation: 2,
     backgroundColor: 'white',
     overflow: 'hidden',
     justifyContent: 'center',
+    borderColor: '#ccc',
   },
+  width100: {width: '100%'},
   padding0: {
     paddingHorizontal: 0,
     paddingVertical: 0,
@@ -125,7 +133,9 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   leftContainer: {
-    left: 15,
+    left: 25,
   },
-  rightContainer: {right: 15},
+  rightContainer: {
+    right: 25,
+  },
 });
