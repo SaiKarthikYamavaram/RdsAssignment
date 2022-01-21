@@ -1,22 +1,18 @@
 import React, {useState} from 'react';
 import {
-  Dimensions,
   LayoutAnimation,
   Platform,
   Pressable,
   StyleSheet,
-  Text,
   UIManager,
-  View,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
+import Animated, {FadeInDown, FadeOutUp} from 'react-native-reanimated';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MailItem from '../components/ContactItem';
 import GmailDetails, {gmailDetails} from '../data/mockdata/GmailDetails';
 
-const {width} = Dimensions.get('window');
 const layoutAnimConfig = {
   duration: 300,
   update: {
@@ -73,8 +69,8 @@ const FlatlistScreen: React.FC<{}> = () => {
     LayoutAnimation.configureNext(layoutAnimConfig);
     if (z.length > 0) {
       setData(z);
+      setDeletedStack(k);
     }
-    setDeletedStack(k);
   };
 
   const renderItem = ({item, index}: {item: gmailDetails; index: number}) => (
@@ -92,12 +88,16 @@ const FlatlistScreen: React.FC<{}> = () => {
       <AnimatedPressable
         onPress={undoDelete}
         disabled={deletedStack.length === 0}
-        style={[
-          styles.bottomContainer,
-          {opacity: deletedStack.length === 0 ? 0.6 : 1},
-        ]}>
+        style={[styles.bottomContainer]}>
         <Icon name="md-arrow-undo-sharp" style={styles.icon} />
-        <Text style={styles.label}>Undo {deletedStack.length} </Text>
+        <Animated.View style={styles.labelContainer}>
+          <Animated.Text
+            entering={FadeInDown}
+            exiting={FadeOutUp}
+            style={[styles.label]}>
+            {deletedStack.length}
+          </Animated.Text>
+        </Animated.View>
       </AnimatedPressable>
     </SafeAreaProvider>
   );
@@ -105,8 +105,12 @@ const FlatlistScreen: React.FC<{}> = () => {
 
 const styles = StyleSheet.create({
   bottomContainer: {
-    width: width,
+    width: 60,
     height: 60,
+    borderRadius: 30,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
     backgroundColor: 'black',
     elevation: 10,
     justifyContent: 'center',
@@ -114,11 +118,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
   },
   icon: {
-    fontSize: 20,
+    fontSize: 16,
     color: 'white',
   },
   label: {
     color: 'white',
+    fontSize: 12,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+  labelContainer: {
+    position: 'absolute',
+    top: -6,
+    left: 0,
+    backgroundColor: 'red',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 export default FlatlistScreen;

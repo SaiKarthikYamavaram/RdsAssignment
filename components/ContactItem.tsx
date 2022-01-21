@@ -5,14 +5,15 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  Layout,
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {gmailDetails} from '../data/mockdata/GmailDetails';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {gmailDetails} from '../data/mockdata/GmailDetails';
 
 const MailItem: React.FC<{
   item: gmailDetails;
@@ -73,7 +74,9 @@ const MailItem: React.FC<{
     [],
   );
   return (
-    <View style={[styles.container, styles.padding0, styles.bgRed]}>
+    <AnimatedView
+      layout={Layout.delay(200)}
+      style={[styles.container, styles.padding0, styles.bgRed]}>
       <PanGestureHandler
         activeOffsetY={[-1e20, 1e20]}
         activeOffsetX={0}
@@ -95,7 +98,7 @@ const MailItem: React.FC<{
       <View style={[styles.iconContainer, styles.rightContainer]}>
         <Icon name="trash-o" style={styles.icon} />
       </View>
-    </View>
+    </AnimatedView>
   );
 };
 

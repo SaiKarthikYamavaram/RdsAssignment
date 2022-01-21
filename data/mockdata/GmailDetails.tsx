@@ -39,7 +39,7 @@ const GmailDetails: Array<gmailDetails> = [
     id: 5,
     description: ' Hi from Marylou Medina',
     title: 'maryloumedina@unq.com',
-    pic: 'https://placeimg.com/640/480',
+    pic: 'https://placeimg.com/640/480/animals',
     phone: '+1 (996) 520-2967',
   },
   {
@@ -81,7 +81,7 @@ const GmailDetails: Array<gmailDetails> = [
     id: 11,
     description: ' Hi from Bernard Chambers',
     title: 'bernardchambers@unq.com',
-    pic: 'https://placeimg.com/640/480',
+    pic: 'https://placeimg.com/640/480/animals',
     phone: '+1 (831) 539-3366',
   },
   {
@@ -130,7 +130,7 @@ const GmailDetails: Array<gmailDetails> = [
     id: 18,
     description: ' Hi from Michelle Barrett',
     title: 'michellebarrett@unq.com',
-    pic: 'https://placeimg.com/640/480',
+    pic: 'https://placeimg.com/640/480/animals',
     phone: '+1 (988) 446-2594',
   },
   {
@@ -158,7 +158,7 @@ const GmailDetails: Array<gmailDetails> = [
     id: 22,
     description: ' Hi from Janna Peck',
     title: 'jannapeck@unq.com',
-    pic: 'https://placeimg.com/640/480',
+    pic: 'https://placeimg.com/640/480/animals',
     phone: '+1 (824) 512-2437',
   },
   {
