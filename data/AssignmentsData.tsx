@@ -22,6 +22,10 @@ const AssignmentData: Array<assignmentData> = [
     title: 'Swipable flatlist',
     destination: NavigationConstants.FLATLIST,
   },
+  {
+    title: 'Products with Cart',
+    destination: NavigationConstants.PRODUCTS,
+  },
 ];
 
 export default AssignmentData;

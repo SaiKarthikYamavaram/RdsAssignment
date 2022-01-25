@@ -10,6 +10,8 @@ import TwitterTextField from '../screens/TwitterTextField';
 import Calculator from '../screens/Calculator';
 import MultipleButtonApi from '../screens/MultipleButtonApi';
 import FlatlistScreen from '../screens/FlatlistScreen';
+import Products from '../screens/Products';
+import ProductsCheckout from '../screens/ProductsCheckout';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +39,16 @@ function Navigation() {
           <Stack.Screen
             name={NavigationConstants.FLATLIST}
             component={gestureHandlerRootHOC(FlatlistScreen)}
+          />
+        </Stack.Group>
+        <Stack.Group>
+          <Stack.Screen
+            name={NavigationConstants.PRODUCTS}
+            component={Products}
+          />
+          <Stack.Screen
+            name={NavigationConstants.CART}
+            component={ProductsCheckout}
           />
         </Stack.Group>
       </Stack.Navigator>

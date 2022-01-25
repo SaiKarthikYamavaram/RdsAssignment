@@ -1,7 +1,10 @@
-export default {
+const NavigationConstants = {
   HOME: 'HOME',
   TWITTER_TEXT_FIELD: 'TWITTER_TEXT_FIELD',
   CACULATOR: 'CACULATOR',
   MULTIPLE_CALLS: 'MULTIPLE_CALLS',
   FLATLIST: 'FLATLIST',
+  CART: 'CART',
+  PRODUCTS: 'PRODUCTS',
 };
+export default NavigationConstants;

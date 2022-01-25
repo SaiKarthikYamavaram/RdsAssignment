@@ -5,8 +5,10 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  FadeOut,
   Layout,
   runOnJS,
+  StretchInY,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -15,6 +17,7 @@ import Animated, {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {gmailDetails} from '../data/mockdata/GmailDetails';
 
+const AnimatedView = Animated.createAnimatedComponent(View);
 const MailItem: React.FC<{
   item: gmailDetails;
   index: number;
@@ -25,8 +28,6 @@ const MailItem: React.FC<{
   const borderWidth = useSharedValue(0);
   const thresholdL = -0.25 * width;
   const thresholdR = 0.25 * width;
-
-  const AnimatedView = Animated.createAnimatedComponent(View);
 
   const panGestureHandler =
     useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
@@ -75,6 +76,8 @@ const MailItem: React.FC<{
   );
   return (
     <AnimatedView
+      entering={StretchInY}
+      exiting={FadeOut}
       layout={Layout.delay(200)}
       style={[styles.container, styles.padding0, styles.bgRed]}>
       <PanGestureHandler
