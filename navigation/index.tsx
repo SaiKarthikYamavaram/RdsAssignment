@@ -12,6 +12,7 @@ import MultipleButtonApi from '../screens/MultipleButtonApi';
 import FlatlistScreen from '../screens/FlatlistScreen';
 import Products from '../screens/Products';
 import ProductsCheckout from '../screens/ProductsCheckout';
+import Test from '../screens/Test';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ function Navigation() {
             component={ProductsCheckout}
           />
         </Stack.Group>
+        <Stack.Screen name={NavigationConstants.TEST} component={Test} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,4 +1,5 @@
 import React, {createContext, useReducer} from 'react';
+import {Platform, UIManager} from 'react-native';
 import 'react-native-gesture-handler';
 import {productType} from './data/mockdata/Products';
 import Navigation from './navigation';
@@ -37,6 +38,13 @@ const reducer = (state: globalState, action: any) => {
       return state;
   }
 };
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
+
 const App: React.FC<{}> = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 

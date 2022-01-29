@@ -8,7 +8,7 @@ import {AppContext} from '../App';
 import {productType} from '../data/mockdata/Products';
 
 const Product: React.FC<{item: productType}> = ({item}) => {
-  const [quantity, setQuantity] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(item.quantity ?? 0);
   const AnimatedText = React.useMemo(
     () => Animated.createAnimatedComponent(Text),
     // eslint-disable-next-line react-hooks/exhaustive-deps

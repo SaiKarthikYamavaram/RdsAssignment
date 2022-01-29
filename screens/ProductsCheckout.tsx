@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Animated, {FlipInEasyX} from 'react-native-reanimated';
@@ -10,11 +10,15 @@ import {AppContext} from '../App';
 import CheckoutItem from '../components/CheckoutItem';
 import {productType} from '../data/mockdata/Products';
 
+const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
+
 const ProductsCheckout = () => {
   const context = useContext(AppContext);
+  const [refresh, setRefresh] = useState<boolean>(false);
+
   const renderItem = ({item, index}: {item: productType; index: number}) => (
     <Animated.View entering={FlipInEasyX.delay(index * 75)}>
-      <CheckoutItem item={item} />
+      <CheckoutItem item={item} refresh={refresh} setRefresh={setRefresh} />
     </Animated.View>
   );
   const navigation = useNavigation();
@@ -22,7 +26,7 @@ const ProductsCheckout = () => {
   const navigatieBack = () => navigation.goBack();
 
   return (
-    <SafeAreaView style={styles.screenConatiner}>
+    <View style={styles.screenConatiner}>
       <View style={styles.header}>
         <MaterialIcon
           onPress={navigatieBack}
@@ -32,21 +36,11 @@ const ProductsCheckout = () => {
         <Text style={styles.headerLabel}>Cart</Text>
         <View />
       </View>
-      <FlatList
+      <AnimatedFlatlist
         data={context?.state?.products}
         // data={ProductArray}
-        ListEmptyComponent={() => (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'red',
-            }}>
-            <Text>Empty</Text>
-          </View>
-        )}
         renderItem={renderItem}
+        extraData={refresh}
         keyExtractor={item => item.id.toString()}
         ListFooterComponent={() =>
           (context?.state?.products.length ?? 0) > 0 ? (
@@ -68,7 +62,7 @@ const ProductsCheckout = () => {
           <Text style={styles.cartLable}>Proceed To Checkout</Text>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

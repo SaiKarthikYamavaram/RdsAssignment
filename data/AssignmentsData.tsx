@@ -26,6 +26,10 @@ const AssignmentData: Array<assignmentData> = [
     title: 'Products with Cart',
     destination: NavigationConstants.PRODUCTS,
   },
+  {
+    title: 'Tests',
+    destination: NavigationConstants.TEST,
+  },
 ];
 
 export default AssignmentData;

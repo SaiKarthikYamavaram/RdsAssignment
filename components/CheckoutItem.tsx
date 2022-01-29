@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {
   Dimensions,
   Image,
+  LayoutAnimation,
   Pressable,
   StyleSheet,
   Text,
@@ -17,7 +18,11 @@ import {productType} from '../data/mockdata/Products';
 
 const {width} = Dimensions.get('window');
 
-const CheckoutItem: React.FC<{item: productType}> = ({item}) => {
+const CheckoutItem: React.FC<{
+  item: productType;
+  refresh: boolean;
+  setRefresh: (k: boolean) => void;
+}> = ({item, refresh, setRefresh}) => {
   const [quantity, setQuantity] = React.useState(item.quantity ?? 0);
   const AnimatedText = React.useMemo(
     () => Animated.createAnimatedComponent(Text),
@@ -32,6 +37,8 @@ const CheckoutItem: React.FC<{item: productType}> = ({item}) => {
   };
   const deleteItem = () => {
     context.dispatch({type: 'deleteProduct', payload: item});
+    setRefresh(!refresh);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
   };
   const decrement = () => {
     if (quantity < 1) {
@@ -55,7 +62,9 @@ const CheckoutItem: React.FC<{item: productType}> = ({item}) => {
         </Text>
       </View>
       <View style={styles.actionContainer}>
-        <Ionicons name="close" style={styles.delete} onPress={deleteItem} />
+        <Pressable onPress={deleteItem}>
+          <Ionicons name="close" style={styles.delete} />
+        </Pressable>
         <View />
         <View style={styles.button}>
           <Pressable
@@ -98,6 +107,7 @@ const styles = StyleSheet.create({
     margin: 4,
     height: 64,
     width: width * 0.9,
+    overflow: 'hidden',
     position: 'relative',
   },
   image: {

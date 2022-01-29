@@ -8,6 +8,7 @@ import Animated, {
   FadeOut,
   FadeOutUp,
   FlipInEasyX,
+  FlipOutEasyX,
 } from 'react-native-reanimated';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -18,10 +19,14 @@ import Product from '../components/Product';
 import NavigationConstants from '../constants/NavigationConstants';
 import ProductArray, {productType} from '../data/mockdata/Products';
 
+const AnimatedFlatlist = Animated.createAnimatedComponent(FlatList);
+
 const Products = () => {
   const context = useContext(AppContext);
   const renderItem = ({item, index}: {item: productType; index: number}) => (
-    <Animated.View entering={FlipInEasyX.delay(index * 75)}>
+    <Animated.View
+      entering={FlipInEasyX.delay(index * 75)}
+      exiting={FlipOutEasyX}>
       <Product item={item} />
     </Animated.View>
   );
@@ -66,7 +71,7 @@ const Products = () => {
           />
         </View>
       </View>
-      <FlatList
+      <AnimatedFlatlist
         data={ProductArray}
         numColumns={2}
         renderItem={renderItem}

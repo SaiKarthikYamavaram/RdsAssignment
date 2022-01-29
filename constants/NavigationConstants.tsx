@@ -6,5 +6,6 @@ const NavigationConstants = {
   FLATLIST: 'FLATLIST',
   CART: 'CART',
   PRODUCTS: 'PRODUCTS',
+  TEST: 'TEST',
 };
 export default NavigationConstants;
